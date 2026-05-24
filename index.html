@@ -1,1 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTAKU VALLEY — Manga & Anime Merch</title>
+    <meta name="description" content="Premium manga, rare figures, authentic katana, deskmats and posters. Japan's finest, delivered.">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg:        #070707;
+            --bg-2:      #0d0d0d;
+            --bg-card:   #111111;
+            --border:    #1d1d1d;
+            --border-2:  #2a2a2a;
+            --red:       #e8192c;
+            --red-glow:  rgba(232, 25, 44, 0.15);
+            --gold:      #f5c518;
+            --green:     #4ade80;
+            --text:      #f0ede8;
+            --text-dim:  #999;
+            --text-muted:#555;
+            --radius:    2px;
+            --font-disp: 'Bebas Neue', sans-serif;
+            --font-serif:'Crimson Pro', serif;
+            --font-body: 'Zen Kaku Gothic New', sans-serif;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior:smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display:block; }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ───────────────────────────────────────
+           NAVBAR
+        ─────────────────────────────────────── */
+        #navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 900;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(1rem, 4vw, 3rem);
+            background: rgba(7,7,7,0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.4s, background 0.4s, height 0.3s;
+        }
+
+        #navbar.scrolled {
+            height: 54px;
+            background: rgba(7,7,7,0.96);
+            border-bottom-color: var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-img {
+            height: 34px;
+            width: auto;
+        }
+
+        .nav-wordmark {
+            font-family: var(--font-disp);
+            font-size: 1.45rem;
+            letter-spacing: 0.08em;
+            line-height: 1;
+        }
+
+        .nav-wordmark em {
+            color: var(--red);
+            font-style: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0; right: 100%;
+            height: 1px;
+            background: var(--red);
+            transition: right 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { right: 0; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--text);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        /* Mobile nav drawer */
+        .mobile-drawer {
+            position: fixed;
+            inset: 0;
+            z-index: 880;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-drawer.open { transform: translateX(0); }
+
+        .mobile-drawer a {
+            font-family: var(--font-disp);
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            transition: color 0.2s;
+        }
+
+        .mobile-drawer a:hover { color: var(--red); }
+
+        /* ───────────────────────────────────────
+           HERO SECTION
+        ─────────────────────────────────────── */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Parallax background layers */
+        .hero-bg {
+            position: absolute;
+            inset: -30% 0;
+            will-change: transform;
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,25,44,0.06) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 50% at 85% 15%, rgba(245,197,24,0.03) 0%, transparent 60%),
+                var(--bg);
+        }
+
+        /* Manga speed-lines sunburst */
+        .hero-rays {
+            position: absolute;
+            inset: 0;
+            background: conic-gradient(
+                from 270deg at 50% 55%,
+                transparent 0deg,   rgba(255,255,255,0.013) 0.8deg,
+                transparent 1.6deg, transparent 8deg,
+                rgba(255,255,255,0.010) 8.8deg, transparent 9.6deg,
+                transparent 16deg,  rgba(255,255,255,0.008) 16.8deg,
+                transparent 17.6deg,transparent 24deg,
+                rgba(255,255,255,0.012) 24.8deg, transparent 25.6deg,
+                transparent 32deg,  rgba(255,255,255,0.009) 32.8deg,
+                transparent 33.6deg,transparent 40deg,
+                rgba(255,255,255,0.011) 40.8deg, transparent 41.6deg,
+                transparent 48deg,  rgba(255,255,255,0.007) 48.8deg,
+                transparent 49.6deg,transparent 56deg,
+                rgba(255,255,255,0.013) 56.8deg, transparent 57.6deg
+            );
+            pointer-events: none;
+        }
+
+        /* Grid overlay */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+        }
+
+        /* Red corner accent */
+        .hero-corner-tl {
+            position: absolute;
+            top: 64px; left: 0;
+            width: 3px;
+            height: 200px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+        }
+
+        .hero-corner-br {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 3px;
+            height: 200px;
+            background: linear-gradient(to top, var(--red), transparent);
+        }
+
+        /* Hero content */
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+            max-width: 900px;
+        }
+
+        .hero-kicker {
+            font-size: 0.62rem;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.7s 0.2s ease forwards;
+        }
+
+        .hero-logo-img {
+            width: min(200px, 45vw);
+            height: auto;
+            margin: 0 auto 1.5rem;
+            opacity: 0;
+            transform: scale(0.88) translateY(10px);
+            animation: logoIn 1s 0.05s ease forwards;
+            filter: drop-shadow(0 0 30px rgba(232,25,44,0.25));
+        }
+
+        .hero-title {
+            font-family: var(--font-disp);
+            font-size: clamp(4rem, 14vw, 10rem);
+            line-height: 0.88;
+            letter-spacing: 0.025em;
+            margin-bottom: 1.25rem;
+            opacity: 0;
+            transform: translateY(28px);
+            animation: fadeUp 0.9s 0.4s ease forwards;
+        }
+
+        .hero-title .t-red   { color: var(--red);  display: block; }
+        .hero-title .t-white { color: var(--text); display: block; }
+
+        .hero-sub {
+            font-family: var(--font-serif);
+            font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+            font-style: italic;
+            color: var(--text-dim);
+            letter-spacing: 0.04em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.7s 0.65s ease forwards;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 0.85rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.7s 0.85s ease forwards;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--red);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 13px 28px;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+        }
+
+        .btn-primary:hover {
+            background: #ff2d3e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,25,44,0.35);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--border-2);
+            color: var(--text-dim);
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 13px 28px;
+            transition: border-color 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--text);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            animation: fadeIn 1s 1.6s ease forwards;
+        }
+
+        .scroll-hint-mouse {
+            width: 20px; height: 32px;
+            border: 1px solid var(--text-muted);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .scroll-hint-mouse::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 50%;
+            transform: translateX(-50%);
+            width: 2px; height: 5px;
+            background: var(--text-muted);
+            border-radius: 1px;
+            animation: scrollBob 1.6s ease-in-out infinite;
+        }
+
+        .scroll-hint span {
+            font-size: 0.55rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ───────────────────────────────────────
+           BANNER CAROUSEL
+        ─────────────────────────────────────── */
+        #banners { overflow: hidden; }
+
+        .banner-wrap {
+            position: relative;
+            height: clamp(220px, 35vw, 440px);
+        }
+
+        .banner-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .banner-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-slide-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .banner-slide.active .banner-slide-img { transform: scale(1.03); }
+
+        .banner-slide-fallback {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0e0e0e 0%, #1a0505 50%, #0e0e0e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-slide-fallback .fb-label {
+            font-family: var(--font-disp);
+            font-size: clamp(1rem, 4vw, 2.5rem);
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.06);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, rgba(7,7,7,0.88) 0%, rgba(7,7,7,0.4) 55%, transparent 100%);
+            display: flex;
+            align-items: center;
+            padding: clamp(1.5rem, 5vw, 4rem);
+        }
+
+        .banner-text h2 {
+            font-family: var(--font-disp);
+            font-size: clamp(1.6rem, 5vw, 3.5rem);
+            letter-spacing: 0.04em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .banner-text p {
+            font-family: var(--font-serif);
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--text-dim);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Banner controls */
+        .banner-dots {
+            position: absolute;
+            bottom: 1.25rem; right: 1.75rem;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .banner-dot {
+            width: 6px; height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.25);
+            cursor: pointer;
+            transition: all 0.35s;
+            border: none;
+        }
+
+        .banner-dot.active {
+            width: 22px;
+            background: var(--red);
+        }
+
+        .banner-arrows {
+            position: absolute;
+            top: 50%; right: 1rem;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .banner-arr {
+            width: 32px; height: 32px;
+            background: rgba(7,7,7,0.6);
+            border: 1px solid var(--border-2);
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        .banner-arr:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+
+        /* ───────────────────────────────────────
+           SHARED SECTION TYPOGRAPHY
+        ─────────────────────────────────────── */
+        .sec-inner {
+            padding: clamp(3rem, 7vw, 5rem) clamp(1rem, 5vw, 3rem);
+        }
+
+        .sec-eye {
+            font-size: 0.62rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 0.6rem;
+        }
+
+        .sec-title {
+            font-family: var(--font-disp);
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            letter-spacing: 0.03em;
+            line-height: 1;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ───────────────────────────────────────
+           CATEGORY CARDS
+        ─────────────────────────────────────── */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(0.5rem, 1.5vw, 1.25rem);
+        }
+
+        @media (max-width: 900px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 480px) { .cat-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; } }
+
+        .cat-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+        }
+
+        .cat-card-bg {
+            position: absolute; inset: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: border-color 0.35s;
+        }
+
+        .cat-card:hover .cat-card-bg { border-color: var(--red); }
+
+        /* left red stripe animation */
+        .cat-card-stripe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 2px; height: 0;
+            background: var(--red);
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cat-card:hover .cat-card-stripe { height: 100%; }
+
+        .cat-card-icon {
+            position: absolute; inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            opacity: 0.12;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .cat-card:hover .cat-card-icon { opacity: 0.22; transform: scale(1.12) rotate(-3deg); }
+
+        .cat-card-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: clamp(0.6rem, 2vw, 1rem);
+            background: linear-gradient(to top, rgba(7,7,7,0.97) 60%, transparent);
+        }
+
+        .cat-card-name {
+            font-family: var(--font-disp);
+            font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.06em;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .cat-card-count {
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        /* ───────────────────────────────────────
+           CATALOG / PRODUCT GRID
+        ─────────────────────────────────────── */
+        #catalog {
+            border-top: 1px solid var(--border);
+        }
+
+        /* Tabs */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tab-bar::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 0.85rem clamp(0.75rem, 2vw, 1.5rem);
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 2px;
+            background: var(--red);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .tab-btn.active { color: var(--text); }
+        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-btn:hover { color: var(--text-dim); }
+
+        /* Product grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 20vw, 220px), 1fr));
+            gap: clamp(0.6rem, 2vw, 1.25rem);
+            padding-top: clamp(1rem, 3vw, 2rem);
+        }
+
+        /* Product card */
+        .p-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .p-card:hover {
+            border-color: rgba(232,25,44,0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,25,44,0.08);
+        }
+
+        /* Image area */
+        .p-card-img {
+            aspect-ratio: 3/4;
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .p-card-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .p-card:hover .p-card-img img { transform: scale(1.06); }
+
+        .p-card-img-ph {
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+        }
+
+        .p-card-img-ph .ph-icon { font-size: clamp(2rem, 5vw, 3rem); opacity: 0.4; }
+        .p-card-img-ph .ph-sku  { font-family: monospace; font-size: 0.58rem; letter-spacing: 0.12em; }
+
+        /* Badges */
+        .badge-sku {
+            position: absolute;
+            top: 0.5rem; left: 0.5rem;
+            background: rgba(7,7,7,0.82);
+            border: 1px solid var(--border);
+            font-family: monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            padding: 2px 6px;
+            backdrop-filter: blur(4px);
+        }
+
+        .badge-off {
+            position: absolute;
+            top: 0.5rem; right: 0.5rem;
+            background: var(--red);
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 3px 6px;
+        }
+
+        /* Info */
+        .p-card-info {
+            padding: clamp(0.6rem, 2vw, 0.9rem);
+        }
+
+        .p-name {
+            font-family: var(--font-serif);
+            font-size: clamp(0.78rem, 2vw, 0.95rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .p-dispatch {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.58rem;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .p-dispatch-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+
+        .p-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .p-price {
+            font-family: var(--font-disp);
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            letter-spacing: 0.03em;
+        }
+
+        .p-mrp {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .p-desc {
+            font-family: var(--font-serif);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 0.45rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* States */
+        .grid-loading, .grid-empty {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            gap: 1rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .spinner {
+            width: 36px; height: 36px;
+            border: 2px solid var(--border);
+            border-top-color: var(--red);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+        }
+
+        .grid-loading p, .grid-empty p {
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .grid-empty .empty-icon { font-size: 2.5rem; margin-bottom: 0.25rem; }
+
+        /* ───────────────────────────────────────
+           PRODUCT DETAIL MODAL
+        ─────────────────────────────────────── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-2);
+            width: min(720px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            transform: scale(0.96) translateY(12px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        @media (max-width: 560px) { .modal-box { grid-template-columns: 1fr; } }
+
+        .modal-img {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        @media (max-width: 560px) { .modal-img { aspect-ratio: 4/3; } }
+
+        .modal-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-img-ph {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 0.75rem; right: 0.75rem;
+            width: 30px; height: 30px;
+            background: rgba(7,7,7,0.85);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.75rem;
+            z-index: 10;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .modal-close:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .modal-content {
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .modal-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .modal-sku-tag {
+            font-family: monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+        }
+
+        .modal-cat-tag {
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--red);
+            border: 1px solid rgba(232,25,44,0.3);
+            padding: 3px 8px;
+        }
+
+        .modal-name {
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .modal-divider { height: 1px; background: var(--border); }
+
+        .modal-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-price { font-family: var(--font-disp); font-size: 2rem; letter-spacing: 0.03em; }
+        .modal-mrp   { font-size: 0.85rem; color: var(--text-muted); text-decoration: line-through; }
+        .modal-save  { font-size: 0.7rem; color: var(--green); font-weight: 700; letter-spacing: 0.06em; }
+
+        .modal-field-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-dispatch-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .modal-desc {
+            font-family: var(--font-serif);
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--text-dim);
+        }
+
+        /* ───────────────────────────────────────
+           FOOTER
+        ─────────────────────────────────────── */
+        #footer {
+            border-top: 1px solid var(--border);
+            padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } }
+
+        .footer-brand { }
+
+        .footer-wordmark {
+            font-family: var(--font-disp);
+            font-size: 1.6rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-wordmark em { color: var(--red); font-style: normal; }
+
+        .footer-tagline {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-nav a {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover { color: var(--text); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* ───────────────────────────────────────
+           SCROLL REVEAL
+        ─────────────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ───────────────────────────────────────
+           KEYFRAMES
+        ─────────────────────────────────────── */
+        @keyframes fadeUp  { to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn  { to { opacity:1; } }
+        @keyframes logoIn  { to { opacity:1; transform:scale(1) translateY(0); } }
+        @keyframes spin    { to { transform:rotate(360deg); } }
+        @keyframes scrollBob {
+            0%,100% { transform: translateX(-50%) translateY(0); opacity:1; }
+            100%     { transform: translateX(-50%) translateY(11px); opacity:0; }
+        }
+
+        /* ───────────────────────────────────────
+           RESPONSIVE HELPERS
+        ─────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        /* Scrollbar style */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-2); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+    </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────── -->
+<nav id="navbar">
+    <a href="#hero" class="nav-logo">
+        <img src="/assets/logo.png" alt="Otaku Valley" class="nav-logo-img"
+             onerror="this.style.display='none'">
+        <span class="nav-wordmark">OTAKU <em>VALLEY</em></span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#banners">New Arrivals</a></li>
+        <li><a href="#catalog">Catalog</a></li>
+        <li><a href="#footer">About</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ─── MOBILE DRAWER ─────────────────────── -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <a href="#hero"     class="mob-link">Home</a>
+    <a href="#banners"  class="mob-link">New Arrivals</a>
+    <a href="#catalog"  class="mob-link">Catalog</a>
+    <a href="#footer"   class="mob-link">About</a>
+</div>
+
+<!-- ─── HERO ──────────────────────────────── -->
+<section id="hero">
+    <div class="hero-bg"  id="heroBg"></div>
+    <div class="hero-rays"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-corner-tl"></div>
+    <div class="hero-corner-br"></div>
+
+    <div class="hero-inner">
+        <p class="hero-kicker">— Japan's Finest, Delivered to Your Door —</p>
+
+        <img src="/assets/logo.png" alt="Otaku Valley" class="hero-logo-img"
+             onerror="this.style.display='none'">
+
+        <h1 class="hero-title">
+            <span class="t-red">OTAKU</span>
+            <span class="t-white">VALLEY</span>
+        </h1>
+
+        <p class="hero-sub">Premium Manga &nbsp;·&nbsp; Rare Figures &nbsp;·&nbsp; Authentic Merch</p>
+
+        <div class="hero-btns">
+            <a href="#catalog" class="btn-primary">Browse Catalog ↓</a>
+            <a href="#banners" class="btn-ghost">New Arrivals</a>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-hint-mouse"></div>
+        <span>Scroll</span>
+    </div>
+</section>
+
+<!-- ─── BANNER CAROUSEL ──────────────────── -->
+<section id="banners">
+    <div class="banner-wrap">
+        <div class="banner-track" id="bannerTrack">
+            <!-- injected by JS -->
+        </div>
+        <div class="banner-arrows">
+            <button class="banner-arr" id="bannerUp" aria-label="Previous banner">▲</button>
+            <button class="banner-arr" id="bannerDn" aria-label="Next banner">▼</button>
+        </div>
+        <div class="banner-dots" id="bannerDots"></div>
+    </div>
+</section>
+
+<!-- ─── CATEGORY STRIP ───────────────────── -->
+<section id="categories">
+    <div class="sec-inner">
+        <p class="sec-eye reveal">Browse By Category</p>
+        <h2 class="sec-title reveal">SHOP THE COLLECTION</h2>
+        <div class="cat-grid" id="catGrid">
+            <!-- injected by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- ─── CATALOG ───────────────────────────── -->
+<section id="catalog">
+    <div class="sec-inner">
+        <p class="sec-eye reveal">Full Inventory</p>
+        <h2 class="sec-title reveal">CATALOG</h2>
+
+        <div class="tab-bar" id="tabBar">
+            <button class="tab-btn active" data-cat="all">All</button>
+            <button class="tab-btn" data-cat="manga">Manga</button>
+            <button class="tab-btn" data-cat="figures">Figures</button>
+            <button class="tab-btn" data-cat="katana">Katana</button>
+            <button class="tab-btn" data-cat="deskmats">Deskmats</button>
+            <button class="tab-btn" data-cat="posters">Posters</button>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+            <div class="grid-loading">
+                <div class="spinner"></div>
+                <p>Loading Inventory…</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────── -->
+<footer id="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <p class="footer-wordmark">OTAKU <em>VALLEY</em></p>
+            <p class="footer-tagline">"Where Every Shelf Tells a Story"</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="#hero">Home</a>
+            <a href="#banners">New Arrivals</a>
+            <a href="#catalog">Catalog</a>
+        </nav>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Otaku Valley. All rights reserved.</p>
+        <p>Manga · Figures · Katana · Deskmats · Posters</p>
+    </div>
+</footer>
+
+<!-- ─── PRODUCT MODAL ─────────────────────── -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox" role="dialog" aria-modal="true">
+        <!-- injected by JS -->
+    </div>
+</div>
+
+
+<script>
+// ╔══════════════════════════════════════════
+//   CONFIGURATION
+// ══════════════════════════════════════════╗
+const CDN_BASE       = '/cdn';
+const RESOURCES_BASE = '/resources';
+const ASSETS_BASE    = '/assets';
+
+const CATEGORIES = [
+    { key: 'manga',    label: 'Manga',    icon: '📚' },
+    { key: 'figures',  label: 'Figures',  icon: '🗿' },
+    { key: 'katana',   label: 'Katana',   icon: '⚔️'  },
+    { key: 'deskmats', label: 'Deskmats', icon: '🎌'  },
+    { key: 'posters',  label: 'Posters',  icon: '🖼️'  },
+];
+
+// ──── FALLBACK DATA (shown when JSON is not yet uploaded) ────
+const FALLBACK = {
+    banners: [
+        { id:'B01', image:null, title:'New Season Arrivals',    subtitle:'Fresh manga & figures just dropped',        link:'#catalog' },
+        { id:'B02', image:null, title:'Limited Edition Katana', subtitle:'Hand-finished authentic replica blades',    link:'#catalog' },
+        { id:'B03', image:null, title:'Deskmat Collection',     subtitle:'Elevate your battlestation with anime art', link:'#catalog' },
+    ],
+    manga: [
+        { sku:'OVM01', name:'One Piece Box Set Vol. 1 (Vol. 1–23)',  price:2999, mrp:3299, dispatch:'2–3 business days', description:'The legendary voyage begins. Luffy sets sail in this iconic box set spanning the East Blue Saga.' },
+        { sku:'OVM02', name:'Demon Slayer Complete Box Set (23 Vol)',  price:3499, mrp:4200, dispatch:'3–5 business days', description:"All 23 volumes of Koyoharu Gotouge's iconic series. Follow Tanjiro's relentless quest." },
+        { sku:'OVM03', name:'Jujutsu Kaisen Vol. 1–10 Bundle',        price:2799, mrp:3500, dispatch:'2–3 business days', description:"Yuji Itadori's dark journey into the world of curses, volumes 1 through 10." },
+        { sku:'OVM04', name:'Attack on Titan Omnibus 1 (Vol. 1–3)',   price:799,  mrp:999,  dispatch:'2–3 business days', description:"Three volumes in one. Humanity's desperate battle against the Titans from the very start." },
+    ],
+    figures: [
+        { sku:'OVF01', name:'Roronoa Zoro — Battle Damaged Ver.',   price:4500, mrp:5500, dispatch:'5–7 business days', description:'High-detail 20cm PVC figure. Battle-worn finish with interchangeable sword arms and display base.' },
+        { sku:'OVF02', name:'Nezuko Kamado — Demon Form',           price:3200, mrp:4000, dispatch:'5–7 business days', description:'Stunning 18cm figure with dynamic bamboo accessory and moonlit bamboo forest base.' },
+        { sku:'OVF03', name:'Gojo Satoru — Infinity Ver.',          price:5800, mrp:7000, dispatch:'7–10 business days', description:'Premium ABS+PVC, 24cm. Glowing infinity-effect base with light-up function (batteries included).' },
+    ],
+    katana: [
+        { sku:'OVK01', name:"Tanjiro's Nichirin Blade — Replica",   price:3800, mrp:4500, dispatch:'7–10 business days', description:'Full-tang carbon steel with engraved flame kanji. 104cm total. Comes in collector display case.' },
+        { sku:'OVK02', name:"Zoro's Wado Ichimonji — Replica",      price:4200, mrp:5000, dispatch:'7–10 business days', description:'Authentic stainless steel blade, traditional cord-wrapped handle. Certificated of authenticity.' },
+    ],
+    deskmats: [
+        { sku:'OVD01', name:'Sakura Season — Deskmat XL',           price:899,  mrp:1199, dispatch:'3–5 business days', description:'Extended 90×40cm stitched-edge deskmat. Cherry blossom ukiyo-e art. Anti-slip rubber base.' },
+        { sku:'OVD02', name:'Spirit Away — Anime Night Sky',         price:999,  mrp:1299, dispatch:'3–5 business days', description:'Dreamy night-festival artwork on smooth cloth. Waterproof coating, 90×40cm.' },
+        { sku:'OVD03', name:'Tokyo Nights — Neon City',              price:799,  mrp:999,  dispatch:'3–5 business days', description:'Retro-futuristic neon cityscape. Perfect for anime + synthwave setups. 90×40cm.' },
+    ],
+    posters: [
+        { sku:'OVP01', name:'One Piece — Straw Hat Crew Art Print',  price:349,  mrp:499,  dispatch:'2–3 business days', description:'A3 (29.7×42cm) museum-quality matte paper with archival inks. Ships rolled in protective tube.' },
+        { sku:'OVP02', name:'Akira — Neo-Tokyo Retro Poster',        price:399,  mrp:599,  dispatch:'2–3 business days', description:'Iconic motorcycle scene, grain-textured retro print. A2 size (42×59.4cm).' },
+        { sku:'OVP03', name:'Attack on Titan — Colossal Titan',      price:299,  mrp:449,  dispatch:'2–3 business days', description:'Dramatic steam-burst artwork on A3 gloss finish. Ready to frame.' },
+    ],
+};
+
+// ╔══════════════════════════════════════════
+//   STATE
+// ══════════════════════════════════════════╗
+let allProducts  = [];
+let activeCategory = 'all';
+let bannerIndex  = 0;
+let bannerTotal  = 0;
+let bannerTimer  = null;
+
+// ╔══════════════════════════════════════════
+//   FETCH HELPER
+// ══════════════════════════════════════════╗
+async function fetchJSON(path) {
+    try {
+        const r = await fetch(path + '?v=' + Date.now());
+        if (!r.ok) throw new Error('404');
+        return await r.json();
+    } catch { return null; }
+}
+
+// ╔══════════════════════════════════════════
+//   BANNERS
+// ══════════════════════════════════════════╗
+async function loadBanners() {
+    const data    = await fetchJSON(`${RESOURCES_BASE}/banners.json`);
+    const banners = data?.banners ?? FALLBACK.banners;
+    renderBanners(banners);
+}
+
+function renderBanners(banners) {
+    bannerTotal = banners.length;
+
+    const track = document.getElementById('bannerTrack');
+    track.innerHTML = banners.map((b, i) => `
+        <div class="banner-slide ${i===0?'active':''}" data-index="${i}">
+            ${b.image
+                ? `<img class="banner-slide-img" src="${b.image}" alt="${b.title}" loading="lazy">`
+                : `<div class="banner-slide-fallback"><span class="fb-label">OTAKU VALLEY</span></div>`
+            }
+            <div class="banner-overlay">
+                <div class="banner-text">
+                    <h2>${b.title}</h2>
+                    <p>${b.subtitle}</p>
+                    <a href="${b.link || '#catalog'}" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    const dots = document.getElementById('bannerDots');
+    dots.innerHTML = banners.map((_, i) =>
+        `<button class="banner-dot ${i===0?'active':''}" data-i="${i}" aria-label="Banner ${i+1}"></button>`
+    ).join('');
+
+    dots.querySelectorAll('.banner-dot').forEach(d => {
+        d.addEventListener('click', () => goBanner(+d.dataset.i));
+    });
+
+    startBannerAuto();
+}
+
+function goBanner(i) {
+    bannerIndex = ((i % bannerTotal) + bannerTotal) % bannerTotal;
+    document.getElementById('bannerTrack').style.transform = `translateX(-${bannerIndex * 100}%)`;
+    document.querySelectorAll('.banner-slide').forEach((s, j) => s.classList.toggle('active', j === bannerIndex));
+    document.querySelectorAll('.banner-dot').forEach((d, j) => d.classList.toggle('active', j === bannerIndex));
+}
+
+function startBannerAuto() {
+    clearInterval(bannerTimer);
+    bannerTimer = setInterval(() => goBanner(bannerIndex + 1), 4800);
+}
+
+// ╔══════════════════════════════════════════
+//   CATEGORY CARDS
+// ══════════════════════════════════════════╗
+function renderCatGrid() {
+    document.getElementById('catGrid').innerHTML = CATEGORIES.map(c => `
+        <a href="#catalog" class="cat-card" onclick="switchCategory('${c.key}')">
+            <div class="cat-card-bg"></div>
+            <div class="cat-card-stripe"></div>
+            <div class="cat-card-icon">${c.icon}</div>
+            <div class="cat-card-label">
+                <span class="cat-card-name">${c.label}</span>
+                <span class="cat-card-count" data-cat="${c.key}">— items</span>
+            </div>
+        </a>
+    `).join('');
+}
+
+function updateCatCounts() {
+    CATEGORIES.forEach(c => {
+        const count = allProducts.filter(p => p.category === c.key).length;
+        const el = document.querySelector(`.cat-card-count[data-cat="${c.key}"]`);
+        if (el) el.textContent = `${count} item${count !== 1 ? 's' : ''}`;
+    });
+}
+
+// ╔══════════════════════════════════════════
+//   PRODUCTS
+// ══════════════════════════════════════════╗
+async function loadProducts() {
+    const cats = CATEGORIES.map(c => c.key);
+    const jsons = await Promise.all(cats.map(c => fetchJSON(`${RESOURCES_BASE}/${c}.json`)));
+
+    allProducts = [];
+    cats.forEach((cat, i) => {
+        const items = jsons[i]?.items ?? FALLBACK[cat] ?? [];
+        items.forEach(item => allProducts.push({ ...item, category: cat }));
+    });
+
+    updateCatCounts();
+    renderProducts();
+}
+
+function renderProducts() {
+    const grid = document.getElementById('productGrid');
+    const list = activeCategory === 'all'
+        ? allProducts
+        : allProducts.filter(p => p.category === activeCategory);
+
+    if (!list.length) {
+        grid.innerHTML = `
+            <div class="grid-empty">
+                <div class="empty-icon">🔍</div>
+                <p>No items found</p>
+            </div>`;
+        return;
+    }
+
+    grid.innerHTML = list.map(p => {
+        const off = p.mrp ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+        const icon = CATEGORIES.find(c => c.key === p.category)?.icon ?? '📦';
+        return `
+        <article class="p-card" onclick="openModal('${p.sku}')" role="button" tabindex="0"
+                 aria-label="${p.name}">
+            <div class="p-card-img">
+                <img
+                    src="${CDN_BASE}/${p.sku}.png"
+                    alt="${p.name}"
+                    loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div class=\\'p-card-img-ph\\'><span class=\\'ph-icon\\'>${icon}</span><span class=\\'ph-sku\\'>${p.sku}</span></div>'"
+                >
+                <span class="badge-sku">${p.sku}</span>
+                ${off > 0 ? `<span class="badge-off">${off}% OFF</span>` : ''}
+            </div>
+            <div class="p-card-info">
+                <p class="p-name">${p.name}</p>
+                <p class="p-dispatch">
+                    <span class="p-dispatch-dot"></span>
+                    Ships in ${p.dispatch}
+                </p>
+                <div class="p-price-row">
+                    <span class="p-price">₹${p.price.toLocaleString('en-IN')}</span>
+                    ${p.mrp ? `<span class="p-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>` : ''}
+                </div>
+                ${p.description ? `<p class="p-desc">${p.description}</p>` : ''}
+            </div>
+        </article>`;
+    }).join('');
+
+    // keyboard support
+    grid.querySelectorAll('.p-card').forEach(c => {
+        c.addEventListener('keydown', e => { if (e.key === 'Enter') c.click(); });
+    });
+}
+
+// ╔══════════════════════════════════════════
+//   CATEGORY SWITCHING
+// ══════════════════════════════════════════╗
+function switchCategory(cat) {
+    activeCategory = cat;
+    document.querySelectorAll('.tab-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.cat === cat)
+    );
+    renderProducts();
+}
+
+// ╔══════════════════════════════════════════
+//   PRODUCT MODAL
+// ══════════════════════════════════════════╗
+function openModal(sku) {
+    const p = allProducts.find(x => x.sku === sku);
+    if (!p) return;
+
+    const catMeta = CATEGORIES.find(c => c.key === p.category);
+    const off     = p.mrp ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+    const icon    = catMeta?.icon ?? '📦';
+
+    document.getElementById('modalBox').innerHTML = `
+        <div class="modal-img">
+            <img
+                src="${CDN_BASE}/${p.sku}.png"
+                alt="${p.name}"
+                onerror="this.parentElement.innerHTML='<div class=\\'modal-img-ph\\'>${icon}</div>'"
+            >
+        </div>
+
+        <div class="modal-content">
+            <div class="modal-badges">
+                <span class="modal-sku-tag">${p.sku}</span>
+                ${catMeta ? `<span class="modal-cat-tag">${catMeta.label}</span>` : ''}
+            </div>
+
+            <h2 class="modal-name">${p.name}</h2>
+
+            <div class="modal-divider"></div>
+
+            <div class="modal-price-row">
+                <span class="modal-price">₹${p.price.toLocaleString('en-IN')}</span>
+                ${p.mrp ? `<span class="modal-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>` : ''}
+                ${off > 0 ? `<span class="modal-save">Save ${off}%</span>` : ''}
+            </div>
+
+            <div>
+                <p class="modal-field-label">Dispatch Time</p>
+                <div class="modal-dispatch-row">
+                    <span class="p-dispatch-dot"></span>
+                    <span>${p.dispatch}</span>
+                </div>
+            </div>
+
+            ${p.description ? `
+            <div>
+                <p class="modal-field-label">Description</p>
+                <p class="modal-desc">${p.description}</p>
+            </div>` : ''}
+        </div>
+
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    `;
+
+    const overlay = document.getElementById('modalOverlay');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ╔══════════════════════════════════════════
+//   PARALLAX
+// ══════════════════════════════════════════╗
+function initParallax() {
+    const bg = document.getElementById('heroBg');
+    if (!bg) return;
+    window.addEventListener('scroll', () => {
+        bg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+    }, { passive: true });
+}
+
+// ╔══════════════════════════════════════════
+//   SCROLL REVEAL
+// ══════════════════════════════════════════╗
+function initReveal() {
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+// ╔══════════════════════════════════════════
+//   NAVBAR SCROLL STATE
+// ══════════════════════════════════════════╗
+function initNavbar() {
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+}
+
+// ╔══════════════════════════════════════════
+//   HAMBURGER
+// ══════════════════════════════════════════╗
+function initHamburger() {
+    const btn    = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobileDrawer');
+
+    const toggle = open => {
+        btn.classList.toggle('open', open);
+        drawer.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    btn.addEventListener('click', () => toggle(!btn.classList.contains('open')));
+    drawer.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => toggle(false)));
+}
+
+// ╔══════════════════════════════════════════
+//   BANNER ARROW BUTTONS
+// ══════════════════════════════════════════╗
+function initBannerArrows() {
+    document.getElementById('bannerUp')?.addEventListener('click', () => {
+        goBanner(bannerIndex - 1);
+        startBannerAuto();
+    });
+    document.getElementById('bannerDn')?.addEventListener('click', () => {
+        goBanner(bannerIndex + 1);
+        startBannerAuto();
+    });
+}
+
+// ╔══════════════════════════════════════════
+//   TABS
+// ══════════════════════════════════════════╗
+function initTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchCategory(btn.dataset.cat));
+    });
+}
+
+// ╔══════════════════════════════════════════
+//   MODAL OVERLAY CLOSE
+// ══════════════════════════════════════════╗
+function initModalClose() {
+    document.getElementById('modalOverlay').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
+}
+
+// ╔══════════════════════════════════════════
+//   BOOT
+// ══════════════════════════════════════════╗
+document.addEventListener('DOMContentLoaded', async () => {
+    renderCatGrid();
+    initParallax();
+    initReveal();
+    initNavbar();
+    initHamburger();
+    initTabs();
+    initBannerArrows();
+    initModalClose();
+    await loadBanners();
+    await loadProducts();
+});
+</script>
+</body>
+</html>
