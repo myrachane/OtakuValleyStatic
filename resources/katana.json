@@ -1,1 +1,22 @@
-
+{
+  "items": [
+    {
+      "sku": "MNG-001",
+      "name": "Demon Slayer Vol. 1",
+      "description": "The first volume of Koyoharu Gotouge's legendary manga series. Tanjiro's journey begins here.",
+      "price": 299,
+      "mrp": 399,
+      "dispatch": "2–4 days",
+      "image": "https://cdn.discordapp.com/attachments/YOUR_CHANNEL_ID/YOUR_FILE_ID/filename.jpg"
+    },
+    {
+      "sku": "MNG-002",
+      "name": "Jujutsu Kaisen Vol. 1",
+      "description": "Yuji Itadori swallows a cursed finger and his life is never the same.",
+      "price": 349,
+      "mrp": 450,
+      "dispatch": "2–4 days",
+      "image": "https://cdn.discordapp.com/attachments/YOUR_CHANNEL_ID/YOUR_FILE_ID/filename.jpg"
+    }
+  ]
+}
