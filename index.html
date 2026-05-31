@@ -366,6 +366,7 @@ img{display:block}a{color:inherit;text-decoration:none}button{cursor:pointer;fon
                 <button class="tab-btn" data-cat="katana">Katana</button>
                 <button class="tab-btn" data-cat="deskmats">Deskmats</button>
                 <button class="tab-btn" data-cat="posters">Custom Posters</button>
+                <button class="tab-btn" data-cat="others">Others</button>
             </div>
             <div class="product-grid" id="productGrid"></div>
         </div>
@@ -402,13 +403,14 @@ img{display:block}a{color:inherit;text-decoration:none}button{cursor:pointer;fon
 </div>
 
 <script>
-const CDN='./cdn', RES='./resources';
+const RES='./resources';
 const CATS=[
     {key:'manga',label:'Manga',icon:'📚'},
     {key:'figures',label:'Figures',icon:'🗿'},
     {key:'katana',label:'Katana',icon:'⚔️'},
     {key:'deskmats',label:'Deskmats',icon:'🎌'},
     {key:'posters',label:'Custom Posters',icon:'🖼️'},
+    {key:'others',label:'Others',icon:'✨'},
 ];
 let allProducts=[],activeCat='all',bannerIdx=0,bannerTotal=0,bannerTimer=null,loadError=false;
 const BANNER_DUR=5500;
@@ -581,7 +583,7 @@ function renderProducts(){
         const icon=CATS.find(c=>c.key===p.category)?.icon??'📦';
         return `<article class="p-card" onclick="openProduct('${p.sku}')" tabindex="0" role="button" aria-label="${p.name}">
             <div class="p-card-img">
-                <img src="${CDN}/${p.sku}.png" alt="${p.name}" loading="lazy"
+                <img src="${p.image||''}" alt="${p.name}" loading="lazy"
                      onerror="this.parentElement.innerHTML='<div class=\\'p-card-img\\'  style=\\'display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:.18;height:100%;\\'>${icon}</div>'">
                 <span class="p-badge-sku">${p.sku}</span>
                 ${off>0?`<span class="p-badge-off">${off}% OFF</span>`:''}
@@ -618,7 +620,7 @@ function renderProductPage(p){
     const icon=cm?.icon??'📦';
     document.getElementById('ppContent').innerHTML=`
         <div class="pp-body">
-            <div class="pp-img"><img src="${CDN}/${p.sku}.png" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'pp-img-ph\\'>${icon}</div>'"></div>
+            <div class="pp-img"><img src="${p.image||''}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'pp-img-ph\\'>${icon}</div>'"></div>
             <div class="pp-info">
                 <div class="pp-tags"><span class="pp-tag">${p.sku}</span>${cm?`<span class="pp-tag-cat">${cm.label}</span>`:''}</div>
                 <h1 class="pp-name">${p.name}</h1>
