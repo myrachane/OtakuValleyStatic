@@ -62,7 +62,33 @@
       "mrp": 1999,
       "dispatch": "15-20 days",
       "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581111449223280/tanjiro-red-blade.png?ex=6a1c97e5&is=6a1b4665&hm=4b2680fd27f0cd96bcbd3946aa137b338639cf71646a6ba313b9f4cf32fce420"
+    },
+    {
+      "sku": "OVK008",
+      "name": "Zoro Purple Enma Wooden Katana 104cm",
+      "description": "Wooden Replica of Zoro's purple enma. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581206659792926/5-1.png?ex=6a1c97fb&is=6a1b467b&hm=acd77774318c791959cde431323d313222c4acdae23c9b6047e4bf915d1546f3"
+    },
+    {
+      "sku": "OVK009",
+      "name": "Zoro White Enma Wooden Katana 104cm",
+      "description": "Wooden Replica of Zoro's white enma. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581235055493153/6-2.png?ex=6a1c9802&is=6a1b4682&hm=1aa3bb0152a2952de9eac6f90bea61139a1c45bc5ffca98988f3691ba8f073ae"
+    },
+    {
+      "sku": "OVK010",
+      "name": "Zoro's Red Kitetsu Wooden Katana 104cm",
+      "description": "Wooden Replica of Zoro's Red Kitetsu. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581267494244352/7-2.png?ex=6a1c980a&is=6a1b468a&hm=87e6377adae9f13c1be2a69c6d2009fb6be4daad4e1f7584216c4d5608051b89"
     }
-    
   ]
 }
