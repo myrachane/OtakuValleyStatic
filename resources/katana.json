@@ -26,6 +26,24 @@
       "mrp": 1999,
       "dispatch": "15-20 days",
       "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477580996118319196/golden-handle.png?ex=6a1c97c9&is=6a1b4649&hm=4577b3a1aa4c9161fa2c8fdc07a61105b72a6b301a5313e2746c4c0bf3c11f90"
+    },
+    {
+      "sku": "OVK004",
+      "name": "Shinobo Kocho Wooden Katana 104cm",
+      "description": "Wooden Replica of Shinobo Kocho's Nichirin Blade. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581035696029788/kocho-katana.png?ex=6a1c97d3&is=6a1b4653&hm=93e7054cd8d8ea1b77dadd21627acf20fe8d50503fcbf238aaedff787625f2e3"
+    },
+    {
+      "sku": "OVK005",
+      "name": "Ichigo's Bankai wooden katana 104cm",
+      "description": "Wooden Replica of Ichigo's Fake Bankai. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477581076351156404/bleach-sqaure-hilt.png?ex=6a1c97dc&is=6a1b465c&hm=bd21305c64ffbc128dd06e7462438235f9aeb6a29c32b318f9c66769ff86bb6c"
     }
   ]
 }
