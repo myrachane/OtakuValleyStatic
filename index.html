@@ -203,26 +203,39 @@ img{display:block}a{color:inherit;text-decoration:none}button{cursor:pointer;fon
 #productPage{min-height:100vh;padding-top:60px}
 .pp-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);padding:1.2rem clamp(1rem,4vw,2.5rem);background:none;border:none;transition:color .2s;border-bottom:1px solid var(--border);width:100%;text-align:left}
 .pp-back:hover{color:var(--red)}.pp-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
-.pp-body{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 120px)}
-@media(max-width:640px){.pp-body{grid-template-columns:1fr}}
-.pp-img{background:var(--bg2);overflow:hidden;aspect-ratio:3/4;position:relative}
-@media(max-width:640px){.pp-img{aspect-ratio:4/3}}
-.pp-img img{width:100%;height:100%;object-fit:cover}
+/* 3-col: [image] [info] — image capped at 420px */
+.pp-body{display:grid;grid-template-columns:minmax(220px,420px) 1fr;min-height:calc(100vh - 120px);align-items:start}
+@media(max-width:700px){.pp-body{grid-template-columns:1fr}}
+.pp-img{background:var(--bg2);overflow:hidden;position:relative;aspect-ratio:1/1;max-height:420px}
+@media(max-width:700px){.pp-img{aspect-ratio:4/3;max-height:none}}
+.pp-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.pp-img:hover img{transform:scale(1.03)}
 .pp-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.15}
-.pp-info{padding:clamp(2rem,5vw,3.5rem);display:flex;flex-direction:column;gap:1.1rem;border-left:1px solid var(--border)}
-@media(max-width:640px){.pp-info{border-left:none;border-top:1px solid var(--border)}}
+.pp-info{padding:clamp(1.5rem,4vw,3rem);display:flex;flex-direction:column;gap:1rem;border-left:1px solid var(--border);position:sticky;top:62px}
+@media(max-width:700px){.pp-info{border-left:none;border-top:1px solid var(--border);position:static}}
 .pp-tags{display:flex;flex-wrap:wrap;gap:.5rem}
 .pp-tag{font-family:monospace;font-size:.58rem;letter-spacing:.16em;color:var(--text-muted);border:1px solid var(--border);padding:3px 8px}
 .pp-tag-cat{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid rgba(232,25,44,.3);padding:3px 8px}
-.pp-name{font-family:var(--font-s);font-weight:600;font-size:clamp(1.2rem,3.5vw,1.8rem);line-height:1.2}
+.pp-name{font-family:var(--font-s);font-weight:600;font-size:clamp(1.2rem,3vw,1.7rem);line-height:1.2}
 .pp-divider{height:1px;background:var(--border)}
 .pp-price-row{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
-.pp-price{font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:.03em}
+.pp-price{font-family:var(--font-d);font-size:clamp(1.7rem,3.5vw,2.3rem);letter-spacing:.03em}
 .pp-mrp{font-size:.9rem;color:var(--text-muted);text-decoration:line-through}
 .pp-save{font-size:.7rem;color:var(--green);font-weight:700;letter-spacing:.06em}
 .pp-field-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem}
 .pp-dispatch{display:flex;align-items:center;gap:6px;font-size:.88rem}
 .pp-desc{font-family:var(--font-s);font-size:.95rem;line-height:1.68;color:var(--text-dim)}
+/* BUY BUTTONS */
+.pp-buy-section{display:flex;flex-direction:column;gap:.6rem;padding-top:.4rem}
+.pp-buy-label{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.1rem}
+.pp-buy-btns{display:flex;gap:.7rem;flex-wrap:wrap}
+.btn-insta{display:inline-flex;align-items:center;gap:8px;color:#fff;font-family:var(--font-b);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px 22px;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:transform .2s,box-shadow .2s,opacity .2s;border:none;background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
+.btn-insta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(220,39,67,.4);opacity:.92}
+.btn-insta svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+.btn-discord-buy{display:inline-flex;align-items:center;gap:8px;background:var(--discord);color:#fff;font-family:var(--font-b);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px 22px;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:background .2s,transform .2s,box-shadow .2s;border:none}
+.btn-discord-buy:hover{background:#4752c4;transform:translateY(-2px);box-shadow:0 10px 28px rgba(88,101,242,.4)}
+.btn-discord-buy svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+.pp-buy-note{font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);font-family:var(--font-s);font-style:italic}
 
 /* FOOTER */
 #footer{border-top:1px solid var(--border);padding:clamp(2.5rem,6vw,4rem) clamp(1rem,4vw,2.5rem)}
@@ -618,6 +631,8 @@ function renderProductPage(p){
     const cm=CATS.find(c=>c.key===p.category);
     const off=p.mrp?Math.round((1-p.price/p.mrp)*100):0;
     const icon=cm?.icon??'📦';
+    const discordSVG=`<svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.045.036.057a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>`;
+    const instaSVG=`<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>`;
     document.getElementById('ppContent').innerHTML=`
         <div class="pp-body">
             <div class="pp-img"><img src="${p.image||''}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'pp-img-ph\\'>${icon}</div>'"></div>
@@ -632,6 +647,19 @@ function renderProductPage(p){
                 </div>
                 <div><p class="pp-field-label">Dispatch Time</p><div class="pp-dispatch"><span class="dot-green"></span><span>${p.dispatch}</span></div></div>
                 ${p.description?`<div><p class="pp-field-label">Description</p><p class="pp-desc">${p.description}</p></div>`:''}
+                <div class="pp-divider"></div>
+                <div class="pp-buy-section">
+                    <p class="pp-buy-label">Order via</p>
+                    <div class="pp-buy-btns">
+                        <a href="https://www.instagram.com/otakuvalley.in/" target="_blank" rel="noopener" class="btn-insta">
+                            ${instaSVG} @otakuvalley.in
+                        </a>
+                        <a href="https://discord.gg/8TrTtyTtq2" target="_blank" rel="noopener" class="btn-discord-buy">
+                            ${discordSVG} Join Discord
+                        </a>
+                    </div>
+                    <p class="pp-buy-note">DM us on Instagram or ping us on Discord to place your order — we'll guide you through checkout.</p>
+                </div>
             </div>
         </div>`;
     showView('product');window.scrollTo({top:0,behavior:'instant'});
