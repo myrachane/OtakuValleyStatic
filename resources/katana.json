@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "sku": "MNG-001",
-      "name": "Demon Slayer Vol. 1",
-      "description": "The first volume of Koyoharu Gotouge's legendary manga series. Tanjiro's journey begins here.",
-      "price": 299,
-      "mrp": 399,
-      "dispatch": "2–4 days",
-      "image": "https://cdn.discordapp.com/attachments/YOUR_CHANNEL_ID/YOUR_FILE_ID/filename.jpg"
+      "sku": "OVK001",
+      "name": "White Sasuke Wooden Katana 104cm",
+      "description": "Wooden Replica",
+      "price": 1399,
+      "mrp": 1500,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477580921203855450/White-Sasuke-katana.png?ex=6a1c97b7&is=6a1b4637&hm=c67a7f269b4db3b1cea0970d70d2a3b8aadbd2f73a989df6d3c1758b6a5e4b43"
     },
     {
       "sku": "MNG-002",
