@@ -17,6 +17,15 @@
       "mrp": 1999,
       "dispatch": "15-20 days",
       "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477580955949600909/white-bleach.png?ex=6a1c97c0&is=6a1b4640&hm=6c6d2892f89f514a0c257f23ebc3fbc45126fafbecc71cb7e1e13c0c6a7504fe"
-    }
+    },
+    {
+      "sku": "OVK003",
+      "name": "Yoriichi Nichirin Wooden Katana 104cm",
+      "description": "Wooden Replica of Yoriichi's Nichirin Blade. High Quality Replica, perfect for cosplay and decoration",
+      "price": 1450,
+      "mrp": 1999,
+      "dispatch": "15-20 days",
+      "image": "https://cdn.discordapp.com/attachments/1447191660244107344/1477580996118319196/golden-handle.png?ex=6a1c97c9&is=6a1b4649&hm=4577b3a1aa4c9161fa2c8fdc07a61105b72a6b301a5313e2746c4c0bf3c11f90"
+    },
   ]
 }
